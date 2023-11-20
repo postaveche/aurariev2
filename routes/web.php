@@ -21,4 +21,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/admincp', [\App\Http\Controllers\admin\main\HomeController::class, 'index'])->middleware('auth')->name('admincp');
+Route::get('/admincp', [\App\Http\Controllers\admin\HomeController::class, 'index'])->middleware('auth')->name('admincp');
+
+Route::resource('admincp/categories', \App\Http\Controllers\admin\CategoriesController::class);
+Route::resource('admincp/products', \App\Http\Controllers\admin\ProductsController::class);

@@ -21,7 +21,7 @@
                         <div class="card-header">
                             <h3 class="card-title">Adăugare produs</h3>
                         </div>
-                        <form action="{{route('products.store')}}" method="POST">
+                        <form action="{{route('products.store')}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
@@ -102,7 +102,7 @@
                                     <label for="image_thumb">Imaginea reprezintativă</label>
                                     <div class="input-group">
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="image_thumb" name="image_thumb">
+                                            <input type="file" class="custom-file-input" id="image_thumb" name="image_thumb" accept="image/png, image/jpeg">
                                             <label class="custom-file-label" for="image_thumb">Selecteză poza</label>
                                         </div>
                                         <div class="input-group-append">
@@ -114,7 +114,7 @@
                                     <label for="images">Pozele produsului</label>
                                     <div class="input-group">
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="images" name="images">
+                                            <input type="file" class="custom-file-input" id="images" name="images" accept="image/png, image/jpeg" multiple>
                                             <label class="custom-file-label" for="images">Selecteză pozele</label>
                                         </div>
                                         <div class="input-group-append">

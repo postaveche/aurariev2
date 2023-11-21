@@ -114,7 +114,7 @@
                                     <label for="images">Pozele produsului</label>
                                     <div class="input-group">
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="images" name="images" accept="image/png, image/jpeg" multiple>
+                                            <input type="file" class="custom-file-input" id="images" name="images[]" accept="image/png, image/jpeg" multiple>
                                             <label class="custom-file-label" for="images">Selecteză pozele</label>
                                         </div>
                                         <div class="input-group-append">
@@ -129,6 +129,16 @@
                                 <div class="form-group">
                                     <label>Полное описание продукта РУ</label>
                                     <textarea class="form-control" rows="3" name="full_desc_ru" placeholder="Описание ..."></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="active" value="1" checked="">
+                                        <label class="form-check-label">Activat</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="active" value="0">
+                                        <label class="form-check-label">Dezactivat</label>
+                                    </div>
                                 </div>
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-success">Salvează</button>

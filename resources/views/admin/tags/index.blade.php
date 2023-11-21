@@ -6,8 +6,8 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-12">
-                        <h1 class="m-0">Toate categoriile de produse</h1>
-                        <small>Vizualizarea tuturor categoriilor de produse disponibile în magazin</small>
+                        <h1 class="m-0">Toate Tagurile produselor</h1>
+                        <small>Vizualizarea tuturor tagurile de sortare a produselor disponibile în magazin</small>
                     </div>
                 </div>
             </div>
@@ -15,10 +15,11 @@
 
         <div class="content">
             <div class="container">
+                <a class="btn btn-primary m-2" href="{{route('tags.create')}}">Adaugă TAG</a>
                 <div>
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Lista de categorii...</h3>
+                            <h3 class="card-title">Lista de taguri...</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body p-0">
@@ -32,16 +33,16 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($categories as $category)
+                                @foreach($tags as $tag)
                                     <tr>
-                                        <td>{{$category->id}}</td>
-                                        <td>{{$category->name_ro}} | {{$category->name_ru}} ({{$category->category_id}})</td>
+                                        <td>{{$tag->id}}</td>
+                                        <td>{{$tag->name_ro}} | {{$tag->name_ru}}</td>
                                         <td>
-                                            {{$category->slug}}
+                                            {{$tag->tag_id}}
                                         </td>
                                         <td>
-                                            <a class="badge badge-success" href="{{route('categories.edit', $category->id)}}" title="Edit"><i class="fas fa-edit"></i></a>
-                                            <a class="badge badge-danger" onclick="return confirm('Doriți să ștergeți categoria?')" href="{{route('categories.destroy', $category->id)}}" title="Delete"><i class="fas fa-trash"></i></a>
+                                            <a class="badge badge-success" href="{{route('tag.edit', $tag->id)}}" title="Edit"><i class="fas fa-edit"></i></a>
+                                            <a class="badge badge-danger" onclick="return confirm('Doriți să ștergeți tagul?')" href="{{route('tag.destroy', $tag->id)}}" title="Delete"><i class="fas fa-trash"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach

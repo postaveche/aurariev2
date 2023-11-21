@@ -25,3 +25,5 @@ Route::get('/admincp', [\App\Http\Controllers\admin\HomeController::class, 'inde
 
 Route::resource('admincp/categories', \App\Http\Controllers\admin\CategoriesController::class);
 Route::resource('admincp/products', \App\Http\Controllers\admin\ProductsController::class);
+Route::resource('admincp/tags', \App\Http\Controllers\admin\TagsController::class);
+

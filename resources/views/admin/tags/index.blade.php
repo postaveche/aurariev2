@@ -41,8 +41,12 @@
                                             {{$tag->tag_id}}
                                         </td>
                                         <td>
-                                            <a class="badge badge-success" href="{{route('tag.edit', $tag->id)}}" title="Edit"><i class="fas fa-edit"></i></a>
-                                            <a class="badge badge-danger" onclick="return confirm('Doriți să ștergeți tagul?')" href="{{route('tag.destroy', $tag->id)}}" title="Delete"><i class="fas fa-trash"></i></a>
+                                            <a class="badge badge-success" href="{{route('tags.edit', $tag->id)}}" title="Edit"><i class="fas fa-edit"></i></a>
+                                            <form action="{{route('tags.destroy', $tag->id)}}" method="post">
+                                                @csrf
+                                                @method('delete')
+                                           <button class="btn btn-outline-danger" type="submit" onclick="return confirm('Doriți să ștergeți tagul?')"><i class="fas fa-trash"></i></button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach

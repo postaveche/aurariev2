@@ -1,5 +1,7 @@
 @extends('admin.layouts.administrations')
 
+@section('title', 'Crearea Tagurilor pentru magazin')
+
 @section('content')
     <div class="content-wrapper">
         <div class="content-header">
@@ -56,10 +58,10 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Tagul principal</label>
-                                    <select class="form-control" name="category_id">
+                                    <select class="form-control" name="tag_id">
                                         <option value="0"> -------------</option>
                                         @foreach($tags as $tag)
-                                            <option value="{{$tag->id}}">{{$category->tag_id}} | {{$tag->id}}) {{$tag->name_ro}}</option>
+                                            <option value="{{$tag->id}}">{{$tag->tag_id}} | {{$tag->id}}) {{$tag->name_ro}}</option>
                                         @endforeach
                                     </select>
                                 </div>

@@ -5,10 +5,14 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Tag;
-use Illuminate\Support\Facades\Str;
+use Illuminate\Support\Str;
 
 class TagsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -61,7 +65,8 @@ class TagsController extends Controller
         $tag->key_ru = $request->key_ru;
         $tag->tag_id = $request->tag_id;
         $tag->slug = Str::slug($request->name_ro);
-        dd($tag);
+        $tag->save();
+        return redirect()->route('tags.index')->withSuccess('Tagul a fost adaugat cu succes!');
     }
 
     /**
@@ -106,6 +111,8 @@ class TagsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $tag = Tag::find($id);
+        $tag->delete();
+        return redirect()->route('tags.index')->withSuccess('Tagul a fost sters cu succes!');
     }
 }

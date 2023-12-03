@@ -14,6 +14,9 @@
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="/admin/css/adminlte.min.css">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="/admin/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="/admin/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
 </head>
 <!--
 `body` tag options:
@@ -48,5 +51,16 @@
 
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="/admin/js/pages/dashboard3.js"></script>
+<!-- Select2 -->
+<script src="/admin/plugins/select2/js/select2.full.min.js"></script>
+<script>
+    //Initialize Select2 Elements
+    $('.select2').select2()
+
+    //Initialize Select2 Elements
+    $('.select2bs4').select2({
+        theme: 'bootstrap4'
+    })
+</script>
 </body>
 </html>

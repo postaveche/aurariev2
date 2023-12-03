@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Tag;
 
 class ProductsController extends Controller
 {
@@ -25,9 +26,11 @@ class ProductsController extends Controller
     {
         $categories = Category::all();
         $products = Product::all();
+        $tags = Tag::all();
         return view('admin.products.index',[
             'categories' => $categories,
-            'products' => $products
+            'products' => $products,
+            'tags' => $tags,
         ]);
     }
 
@@ -39,8 +42,10 @@ class ProductsController extends Controller
     public function create()
     {
         $categories = Category::all();
+        $tags = Tag::all();
         return view('admin.products.create', [
             'categories' => $categories,
+            'tags' => $tags,
         ]);
     }
 

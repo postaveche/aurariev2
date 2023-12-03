@@ -68,7 +68,7 @@
                                             <select class="form-control" name="category_id">
                                                 <option value="0"> -------------</option>
                                                 @foreach($categories as $category)
-                                                    <option value="{{$category->id}}">{{$category->category_id}}
+                                                    <option value="{{$category->id}}" @if($category->category_id == '0') disabled @endif>{{$category->category_id}}
                                                         | {{$category->id}}) {{$category->name_ro}}</option>
                                                 @endforeach
                                             </select>
@@ -139,6 +139,14 @@
                                         <input class="form-check-input" type="radio" name="active" value="0">
                                         <label class="form-check-label">Dezactivat</label>
                                     </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Tagurile produsului</label>
+                                    <select name="tags[]" class="select2bs4 select2-hidden-accessible" multiple="" data-placeholder="Selectati Tagurile" style="width: 100%;" data-select2-id="23" tabindex="-1" aria-hidden="true">
+                                        @foreach($tags as $tag)
+                                            <option value="{{$tag->id}}">{{$tag->name_ro}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-success">Salvează</button>

@@ -9,6 +9,7 @@ use App\Models\Product;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Tag;
+use App\Models\ProductTags;
 
 class ProductsController extends Controller
 {
@@ -75,7 +76,9 @@ class ProductsController extends Controller
             'images' => 'required|max:8096',
             'full_desc_ro' => 'max:20000',
             'full_desc_ru' => 'max:20000',
+            'tags' =>'nullable|array'
         ]);
+        //dd($request);
         $product = new Product();
         $product->slug = $next_id . '-' . Str::slug($request->name_ro);
         $product->name_ro = $request->name_ro;
@@ -109,6 +112,14 @@ class ProductsController extends Controller
         $product->full_desc_ro = $request->full_desc_ro;
         $product->full_desc_ru = $request->full_desc_ru;
         $product->active = $request->active;
+        $tagsIds = $request->tags;
+        unset($request->tags);
+        foreach ($tagsIds as $tagsId){
+            ProductTags::firstOrCreate([
+                'product_id' => $next_id,
+                'tag_id' =>$tagsId
+            ]);
+        }
         $product->save();
         return redirect()->back()->with('success', 'Produsul a fost adaugat cu succes!!!');
     }
@@ -135,10 +146,18 @@ class ProductsController extends Controller
         $categories = Category::all();
         $product = Product::where('id', $id)->get();
         $product_image = json_decode($product[0]->images);
+        $alltags = Tag::all();
+        $product_tags = ProductTags::where('product_id', $id)->get();
+        $tagsIds = [];
+        foreach ($product_tags as $tags){
+            $tagsIds[] = $tags->tag_id;
+        }
         return view('admin.products.edit', [
             'product' => $product,
             'categories' => $categories,
-            'product_images' => $product_image
+            'product_images' => $product_image,
+            'tagsIds' => $tagsIds,
+            'tags' => $alltags
         ]);
     }
 
@@ -193,6 +212,15 @@ class ProductsController extends Controller
         $product->full_desc_ro = $request->full_desc_ro;
         $product->full_desc_ru = $request->full_desc_ru;
         $product->active = $request->active;
+        $tagsIds = $request->tags;
+        unset($request->tags);
+        ProductTags::where('product_id', $id)->delete();
+        foreach ($tagsIds as $tagsId){
+            ProductTags::firstOrCreate([
+                'product_id' => $id,
+                'tag_id' =>$tagsId
+            ]);
+        }
         $product->save();
         return redirect()->route('products.index')->with('success', 'Produsul a fost adaugat cu succes!!!');
     }

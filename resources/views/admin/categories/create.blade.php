@@ -64,7 +64,7 @@
                                     <select class="form-control" name="category_id">
                                         <option value="0"> -------------</option>
                                         @foreach($categories as $category)
-                                            <option value="{{$category->id}}">{{$category->category_id}} | {{$category->id}}) {{$category->name_ro}}</option>
+                                            <option value="{{$category->id}}">{{$category->maincategory->name_ro??null}} | {{$category->name_ro}}</option>
                                         @endforeach
                                     </select>
                                 </div>

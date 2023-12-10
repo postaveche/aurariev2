@@ -35,7 +35,7 @@
                                 @foreach($categories as $category)
                                     <tr>
                                         <td>{{$category->id}}</td>
-                                        <td>{{$category->name_ro}} | {{$category->name_ru}} ({{$category->category_id}})</td>
+                                        <td><b>{{$category->maincategory->name_ro??null}}</b> * {{$category->name_ro}} | {{$category->name_ru}} ({{$category->category_id}})</td>
                                         <td>
                                             {{$category->slug}}
                                         </td>

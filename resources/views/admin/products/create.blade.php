@@ -68,8 +68,8 @@
                                             <select class="form-control" name="category_id">
                                                 <option value="0"> -------------</option>
                                                 @foreach($categories as $category)
-                                                    <option value="{{$category->id}}" @if($category->category_id == '0') disabled @endif>{{$category->category_id}}
-                                                        | {{$category->id}}) {{$category->name_ro}}</option>
+                                                    <option value="{{$category->id}}" @if($category->category_id == '0') disabled @endif><b>{{$category->maincategory->name_ro??null}}</b>
+                                                        | {{$category->name_ro}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -124,11 +124,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Descrierea complectă a produsului RO</label>
-                                    <textarea class="form-control" rows="3" name="full_desc_ro" placeholder="Scrie ..."></textarea>
+                                    <textarea id="aurarieeditor" class="form-control" rows="3" name="full_desc_ro" placeholder="Scrie ..."></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label>Полное описание продукта РУ</label>
-                                    <textarea class="form-control" rows="3" name="full_desc_ru" placeholder="Описание ..."></textarea>
+                                    <textarea id="aurarieeditor" class="form-control" rows="3" name="full_desc_ru" placeholder="Описание ..."></textarea>
                                 </div>
                                 <div class="form-group">
                                     <div class="form-check">

@@ -38,7 +38,7 @@
                                         <td>{{$tag->id}}</td>
                                         <td>{{$tag->name_ro}} | {{$tag->name_ru}}</td>
                                         <td>
-                                            {{$tag->tag_id}}
+                                            {{$tag->slug}}
                                         </td>
                                         <td>
                                             <a class="badge badge-success" href="{{route('tags.edit', $tag->id)}}" title="Edit"><i class="fas fa-edit"></i></a>

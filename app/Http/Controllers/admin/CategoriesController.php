@@ -19,7 +19,7 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::orderBy('category_id')->get();
         return view('admin.categories.index', [
             'categories' => $categories,
         ]);
@@ -32,7 +32,7 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        $all = Category::all();
+        $all = Category::orderBy('category_id')->get();
         return view('admin.categories.create', [
             'categories' => $all,
         ]);
@@ -90,7 +90,7 @@ class CategoriesController extends Controller
     public function edit($id)
     {
         $categoryinfo = Category::where('id', $id)->get();
-        $categories = Category::all();
+        $categories = Category::orderBy('category_id')->get();;
         return view('admin.categories.edit',[
             'categoryinfo' =>$categoryinfo,
             'categories' => $categories

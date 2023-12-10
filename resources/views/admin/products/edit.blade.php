@@ -78,11 +78,11 @@
                                                 <option value="0"> -------------</option>
                                                 @foreach($categories as $category)
                                                     @if($product[0]->category_id == $category->id)
-                                                    <option value="{{$category->id}}" selected>{{$category->category_id}}
-                                                        | {{$category->id}}) {{$category->name_ro}}</option>
+                                                        <option value="{{$category->id}}" selected><b>{{$category->maincategory->name_ro??null}}</b>
+                                                        | {{$category->name_ro}}</option>
                                                     @else
-                                                        <option value="{{$category->id}}">{{$category->category_id}}
-                                                            | {{$category->id}}) {{$category->name_ro}}</option>
+                                                        <option value="{{$category->id}}"><b>{{$category->maincategory->name_ro??null}}</b>
+                                                            | {{$category->name_ro}}</option>
                                                     @endif
                                                 @endforeach
                                             </select>
@@ -150,11 +150,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Descrierea complectă a produsului RO</label>
-                                    <textarea class="form-control" rows="3" name="full_desc_ro" placeholder="Scrie ...">{{old('full_desc_ro')??$product[0]->full_desc_ro}}</textarea>
+                                    <textarea id="aurarieeditor" class="form-control" rows="3" name="full_desc_ro" placeholder="Scrie ...">{{old('full_desc_ro')??$product[0]->full_desc_ro}}</textarea>
                                 </div>
                                 <div class="form-group">
                                     <label>Полное описание продукта РУ</label>
-                                    <textarea class="form-control" rows="3" name="full_desc_ru" placeholder="Описание ...">{!!old('full_desc_ru')??$product[0]->full_desc_ru!!}</textarea>
+                                    <textarea id="aurarieeditor" class="form-control" rows="3" name="full_desc_ru" placeholder="Описание ...">{!!old('full_desc_ru')??$product[0]->full_desc_ru!!}</textarea>
                                 </div>
                                 <div class="form-group">
                                     <div class="form-check">

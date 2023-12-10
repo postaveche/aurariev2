@@ -66,9 +66,9 @@
                                         <option value="0"> -------------</option>
                                         @foreach($categories as $category)
                                             @if($categoryinfo[0]->category_id == $category->id)
-                                                <option value="{{$category->id}}" selected>{{$category->category_id}} | {{$category->id}}) {{$category->name_ro}}</option>
+                                                <option value="{{$category->id}}" selected>{{$category->maincategory->name_ro??null}} | {{$category->name_ro}}</option>
                                             @else
-                                            <option value="{{$category->id}}">{{$category->category_id}} | {{$category->id}}) {{$category->name_ro}}</option>
+                                            <option value="{{$category->id}}">{{$category->maincategory->name_ro??null}} | {{$category->name_ro}}</option>
                                             @endif
                                         @endforeach
                                     </select>

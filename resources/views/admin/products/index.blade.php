@@ -39,18 +39,23 @@
                                 </thead>
                                 <tbody>
                                 @foreach($products as $product)
+
                                     <tr>
                                         <td><b>{{$product->id}}</b></td>
                                         <td><img style="width: 90px; border: #565757 1px solid; border-radius: 10px;" src="/storage/products_thumb/{{$product->image_thumb}}" alt="{{$product->name_ro}}"></td>
                                         <td><b>{{$product->name_ro}}</b> <br> <small>{{$product->name_ru}}</small></td>
-                                        <td>{{$product->category_id}}</td>
+                                        <td>{{$product->mycategory->name_ro??null}}</td>
                                         <td>
                                             {{$product->slug}}
                                         </td>
                                         <td>{{$product->price}} MDL</td>
                                         <td>
-                                            <a class="badge badge-success" href="{{route('products.edit', $product->id)}}" title="Edit"><i class="fas fa-edit"></i></a>
-                                            <a class="badge badge-danger" onclick="return confirm('Doriți să ștergeți produsul?')" href="{{route('products.destroy', $product->id)}}" title="Delete"><i class="fas fa-trash"></i></a>
+                                            <a class="btn btn-outline-warning" href="{{route('products.edit', $product->id)}}" title="Edit"><i class="fas fa-edit"></i></a>
+                                            <form action="{{route('products.destroy', $product->id)}}" method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <button class="btn btn-outline-danger" type="submit" onclick="return confirm('Doriți să ștergeți produsul?')"><i class="fas fa-trash"></i></button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach

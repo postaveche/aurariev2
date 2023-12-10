@@ -28,7 +28,7 @@ class ProductsController extends Controller
         $categories = Category::all();
         $products = Product::all();
         $tags = Tag::all();
-        return view('admin.products.index',[
+        return view('admin.products.index', [
             'categories' => $categories,
             'products' => $products,
             'tags' => $tags,
@@ -42,7 +42,7 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
+        $categories = Category::orderBy('category_id')->get();
         $tags = Tag::all();
         return view('admin.products.create', [
             'categories' => $categories,
@@ -76,7 +76,7 @@ class ProductsController extends Controller
             'images' => 'required|max:8096',
             'full_desc_ro' => 'max:20000',
             'full_desc_ru' => 'max:20000',
-            'tags' =>'nullable|array'
+            'tags' => 'nullable|array'
         ]);
         //dd($request);
         $product = new Product();
@@ -98,26 +98,26 @@ class ProductsController extends Controller
             $data = $name;
         }
         $product->image_thumb = $data;
-        if ($request->hasFile('images')){
+        if ($request->hasFile('images')) {
             $i = 1;
-            foreach ($request->file('images') as $product_file){
-                $name = $product->slug.'_'.$i.'_'.$next_id.'.'.$product_file->extension();
+            foreach ($request->file('images') as $product_file) {
+                $name = $product->slug . '_' . $i . '_' . $next_id . '.' . $product_file->extension();
                 $product_file->storeAs('public/products/', $name);
                 $i = $i + 1;
                 $data_img[] = $name;
             }
         }
         $product->images = json_encode($data_img);
-        $product->images_qty = $i-1;
+        $product->images_qty = $i - 1;
         $product->full_desc_ro = $request->full_desc_ro;
         $product->full_desc_ru = $request->full_desc_ru;
         $product->active = $request->active;
         $tagsIds = $request->tags;
         unset($request->tags);
-        foreach ($tagsIds as $tagsId){
+        foreach ($tagsIds as $tagsId) {
             ProductTags::firstOrCreate([
                 'product_id' => $next_id,
-                'tag_id' =>$tagsId
+                'tag_id' => $tagsId
             ]);
         }
         $product->save();
@@ -143,13 +143,13 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
-        $categories = Category::all();
+        $categories = Category::orderBy('category_id')->get();
         $product = Product::where('id', $id)->get();
         $product_image = json_decode($product[0]->images);
         $alltags = Tag::all();
         $product_tags = ProductTags::where('product_id', $id)->get();
         $tagsIds = [];
-        foreach ($product_tags as $tags){
+        foreach ($product_tags as $tags) {
             $tagsIds[] = $tags->tag_id;
         }
         return view('admin.products.edit', [
@@ -184,7 +184,7 @@ class ProductsController extends Controller
         $product->promo_price = $request->promo_price;
         $product->cantitate = $request->cantitate;
         if ($request->hasFile('image_thumb')) {
-            if(Storage::exists('public/products_thumb/'.$product->image_thumb)) {
+            if (Storage::exists('public/products_thumb/' . $product->image_thumb)) {
                 Storage::delete('public/products_thumb/' . $product->image_thumb);
             }
             $name = $product->slug . '_' . $id . '.' . $request->image_thumb->extension();
@@ -192,22 +192,22 @@ class ProductsController extends Controller
             $data = $name;
             $product->image_thumb = $data;
         }
-        if ($request->hasFile('images')){
+        if ($request->hasFile('images')) {
             $i = 1;
             $old_file = json_decode($product->images);
-            foreach ($old_file as $file){
-                if(Storage::exists('public/products/'.$file)) {
+            foreach ($old_file as $file) {
+                if (Storage::exists('public/products/' . $file)) {
                     Storage::delete('public/products/' . $file);
                 }
             }
-            foreach ($request->file('images') as $product_file){
-                $name = $product->slug.'_'.$i.'_'.$id.'.'.$product_file->extension();
+            foreach ($request->file('images') as $product_file) {
+                $name = $product->slug . '_' . $i . '_' . $id . '.' . $product_file->extension();
                 $product_file->storeAs('public/products/', $name);
                 $i = $i + 1;
                 $data_img[] = $name;
             }
             $product->images = json_encode($data_img);
-            $product->images_qty = $i-1;
+            $product->images_qty = $i - 1;
         }
         $product->full_desc_ro = $request->full_desc_ro;
         $product->full_desc_ru = $request->full_desc_ru;
@@ -215,10 +215,10 @@ class ProductsController extends Controller
         $tagsIds = $request->tags;
         unset($request->tags);
         ProductTags::where('product_id', $id)->delete();
-        foreach ($tagsIds as $tagsId){
+        foreach ($tagsIds as $tagsId) {
             ProductTags::firstOrCreate([
                 'product_id' => $id,
-                'tag_id' =>$tagsId
+                'tag_id' => $tagsId
             ]);
         }
         $product->save();
@@ -233,6 +233,20 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = Product::findorfail($id);
+        if (Storage::exists('public/products_thumb/' . $product->image_thumb)) {
+            Storage::delete('public/products_thumb/' . $product->image_thumb);
+        }
+        $images = json_decode($product->images);
+        if (isset($images)) {
+            foreach ($images as $image) {
+                if (Storage::exists('public/products/' . $image)) {
+                    Storage::delete('public/products/' . $image);
+                }
+            }
+        }
+        ProductTags::where('product_id', $id)->delete();
+        $product->delete();
+        return redirect()->route('products.index')->with('success', 'Produsul a fost șters cu succes!!!');
     }
 }

@@ -10,9 +10,20 @@
     </div>
     <div class="header_item col-sm-4">
         <div class="header_small_button">
-            <span><i class="bi bi-heart"></i></span>
-            <span><i class="bi bi-people-fill"></i></span>
-            <span><i class="bi bi-bag-heart-fill"></i></span>
+            <span class="header_link"><i class="bi bi-heart"></i></span>
+            @guest()
+            <span class="header_link"><a href="/login"><i class="bi bi-people-fill"></i></a></span>
+            @else
+                <div class="dropdown">
+                    <a href="#" onclick="myFunction()" class="dropbtn"><i class="bi bi-people-fill"></i></a>
+                    <div id="myDropdown" class="dropdown-content">
+                        <a href="#">Link 1</a>
+                        <a href="#">Link 2</a>
+                        <a href="#">Link 3</a>
+                    </div>
+                </div>
+            @endguest
+            <span class="header_link"><i class="bi bi-bag-heart-fill"></i></span>
         </div>
     </div>
 </div>

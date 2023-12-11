@@ -15,11 +15,18 @@
             <span class="header_link"><a href="/login"><i class="bi bi-people-fill"></i></a></span>
             @else
                 <div class="dropdown">
-                    <a href="#" onclick="myFunction()" class="dropbtn"><i class="bi bi-people-fill"></i></a>
-                    <div id="myDropdown" class="dropdown-content">
-                        <a href="#">Link 1</a>
-                        <a href="#">Link 2</a>
-                        <a href="#">Link 3</a>
+                    <button class="dropbtn" onclick="userMenu()"><i onclick="userMenu()" class="bi bi-people-fill"></i> {{ Auth::user()->name }}</button>
+                    <div class="dropdown-content" id="myDropdown">
+                        @if(Auth::user()->role == '1')
+                            <a href="/admincp">Admin</a>
+                        @endif
+                        <a href="/home">Profil</a>
+                        <a href="/orders">Comenzi</a>
+                        <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">Logout</a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
                     </div>
                 </div>
             @endguest

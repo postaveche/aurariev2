@@ -346,3 +346,89 @@ footer hr{
     text-align: center;
     margin-left: 10px;
 }
+
+/* Dropdown Button */
+.dropbtn {
+    background-color: #f6f8fb;
+    padding: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+/* Dropdown button on hover & focus */
+.dropbtn:hover, .dropbtn:focus {
+    color: #2b2f32;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #050505;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 100;
+    font-size: 1rem;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: #ffffff;
+    padding: 5px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #484848
+}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {display:block;}
+
+/* HOME*/
+
+.home_title{
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+}
+
+.home_sidebar{
+    width: 100%;
+    display: block;
+    justify-content: center;
+    background-color: #cecccc;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.home_logo_block{
+    position: relative;
+    display: flex;
+    margin: 20px;
+    justify-content: center;
+}
+
+.home_logo_user{
+    display: flex;
+    position: absolute;
+    color: #ffffff;
+}
+
+.home_logo_img{
+    max-width: 150px;
+}
+
+.home_navigation{
+    display: block;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}

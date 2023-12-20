@@ -26,7 +26,7 @@ class ProductsController extends Controller
     public function index()
     {
         $categories = Category::all();
-        $products = Product::all();
+        $products = Product::orderBy('id', 'desc')->get();
         $tags = Tag::all();
         return view('admin.products.index', [
             'categories' => $categories,

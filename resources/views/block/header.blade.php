@@ -30,7 +30,7 @@
                     </div>
                 </div>
             @endguest
-            <span class="header_link"><i class="bi bi-bag-heart-fill"></i></span>
+            <span class="header_link"><a href="/cart"><i class="bi bi-bag-heart-fill"></a></i></span>
         </div>
     </div>
 </div>

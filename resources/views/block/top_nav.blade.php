@@ -6,10 +6,10 @@
             <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
                 <ul class="navbar-nav mb-2 mb-lg-0">
                     <li class="nav-item aurarie_top_item">
-                        <a class="nav-link" href="/">Acasă</a>
+                        <a class="nav-link" href="{{route('main')}}">Acasă</a>
                     </li>
                     <li class="nav-item aurarie_top_item">
-                        <a class="nav-link" href="/colectia">Colecția</a>
+                        <a class="nav-link" href="{{ route('categories') }}">Colecția</a>
                     </li>
                     <li class="nav-item aurarie_top_item">
                         <a class="nav-link" href="/colectia">Calitate</a>

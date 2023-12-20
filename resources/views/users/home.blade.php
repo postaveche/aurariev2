@@ -24,7 +24,7 @@
             </div>
         </div>
         <div class="col-xl-9">
-            Continut
+
         </div>
         </div>
     </div>

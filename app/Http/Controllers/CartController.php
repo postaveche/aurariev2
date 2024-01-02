@@ -94,4 +94,9 @@ class CartController extends Controller
             return redirect()->back()->with('succes', 'Produsul a fost șters cu succes din coș!');
         }
     }
+
+    public function cart_count($id){
+        $cart_count = Cart::where('user_id', $id)->count();
+        return $cart_count;
+    }
 }

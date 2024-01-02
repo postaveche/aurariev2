@@ -8,12 +8,12 @@
 
 @section('content')
     <div class="container">
-        @if(session('succes'))
-            @include('messages.succes')
-        @elseif(session('error'))
-            @include('messages.error')
-        @endif
         <div class="product">
+            @if(session('succes'))
+                @include('messages.succes')
+            @elseif(session('error'))
+                @include('messages.error')
+            @endif
             <div class="row">
                 <div class="col-lg-6">
                     <div class="product_img">
